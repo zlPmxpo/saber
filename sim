@@ -1,0 +1,105 @@
+local Config = {
+    WindowName = "michaelhook_",
+	Color = Color3.fromRGB(0,102,204),
+	Keybind = Enum.KeyCode.RightBracket
+}
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/AlexR32/Roblox/main/BracketV3.lua"))()
+local Window = Library:CreateWindow(Config, game:GetService("CoreGui"))
+
+
+local Tab1 = Window:CreateTab("Main")
+local Tab5 = Window:CreateTab("Settings")
+
+local Section1 = Tab1:CreateSection("Saber Simulator")
+local Section2 = Tab1:CreateSection("Eggs")
+local Section3 = Tab1:CreateSection("Classes")
+local Section10 = Tab5:CreateSection("Menu")
+
+local Toggle1 = Section2:CreateButton("Basic", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(617.65618896484, 184.21102905273, 43.773120880127)
+end)
+local Toggle1 = Section2:CreateButton("Wood", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(635.70751953125, 184.21102905273, 44.053134918213)
+end)
+local Toggle1 = Section2:CreateButton("Metal", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(619.41180419922, 184.21105957031, 61.187896728516)
+end)
+local Toggle1 = Section2:CreateButton("Granite", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(636.66131591797, 184.21102905273, 60.537532806396)
+end)
+local Toggle1 = Section2:CreateButton("Turkey", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(670.6982421875, 184.21102905273, 51.288661956787)
+end)
+local Toggle1 = Section3:CreateButton("Buy all classes", function()
+    
+for i,v in pairs(ReplicatedStorage.ShopItems.Classes:GetChildren()) do 
+    game:GetService("ReplicatedStorage").Events.BuyItem:FireServer(v.Name)
+    end
+ end)
+
+local Toggle1 = Section1:CreateButton("Buy all swords", function()
+local ohString1 = "Swords"
+
+game:GetService("ReplicatedStorage").Events.BuyAll:FireServer(ohString1)
+end) 
+local Toggle1 = Section1:CreateButton("Buy all upgrades", function()
+
+local ohString1 = "JumpBoosts"
+local ohString2 = "BossBoosts"
+local ohString3 = "Auras"
+local ohString4 = "PetAuras"
+
+game:GetService("ReplicatedStorage").Events.BuyAll:FireServer(ohString1,ohString2,ohString3,ohString4)
+end) 
+local Toggle1 = Section1:CreateToggle("Auto swing", nil, function(v)
+  getgenv().swing = v 
+    while true do
+        wait(.1)
+        if not getgenv().swing then return end
+game:GetService("ReplicatedStorage").Events.Clicked:FireServer()
+end
+end)  
+local Toggle1 = Section1:CreateToggle("Auto sell", nil, function(v)
+local oldpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+  getgenv().sell = v 
+    while true do
+        wait(.1)
+        if not getgenv().sell then return end
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(532.703369, 177.340652, 152.329407, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldpos
+end
+end)  
+local Toggle1 = Section1:CreateToggle("Buy all dna", nil, function(v)
+      getgenv().dna = v 
+    while true do
+        wait(.1)
+        if not getgenv().dna then return end
+local ohString1 = "Backpacks"
+
+game:GetService("ReplicatedStorage").Events.BuyAll:FireServer(ohString1)
+end
+end)    
+local Toggle1 = Section1:CreateToggle("Get Crowns", nil, function(v)
+local oldpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+          getgenv().crowns = v 
+    while true do
+        wait(.1)
+        if not getgenv().crowns then return end
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(792.707, 245.6, 31.2352)
+wait(1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldpos
+end
+end)    
+
+
+
+
+local Toggle3 = Section10:CreateToggle("UI Toggle", nil, function(State)
+	Window:Toggle(State)
+end)
+Toggle3:CreateKeybind(tostring(Config.Keybind):gsub("Enum.KeyCode.", ""), function(Key)
+	Config.Keybind = Enum.KeyCode[Key]
+end)
+Toggle3:SetState(true)
